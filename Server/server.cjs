@@ -27,6 +27,14 @@ const movieSchema = new mongoose.Schema({
 
 const Movie = mongoose.model('Movie', movieSchema);
 
+app.delete('/api/movie/:id', async (req, res) => {
+  
+        console.log('Deleting movie with ID:', req.params.id);
+        const movie = await Movie.findByIdAndDelete(req.params.id);
+        res.status(200).send({ message: "Movie deleted successfully", movie });
+        console.log("Deleted Movie with id "+req.params.id);
+        
+    });
 
 
 app.get('/', (req, res) => {
